@@ -1,80 +1,466 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name=2"viewport" content="width=device-width, initial-scale=1.0" /> border-box;
-<title>Ejemplo de Página con HTML5</title>
-<style>
-/*Reset some default styles */
-box-sizing:
-body { 
-font-family: 'segoe UI', tahoma, geneva, verdana sans-serif;
-margin: 0;ground: white;
-backgound: #f4f7f8;
-color: #333;
-line-height: 1.6;
-header, nav, main, section, article, aside, footer {
-padding: 1rem 2rem;
-margin:0 auto;
-max-width: 900px;
-background: white;
-margin-bottom; 1.5rem;
-border-radius:8px;
-box-shadow: 0 0 10px rgba(0,0,0,0.05);
-header {
-background: #007acc;
-color: white;
-text-align: center;
-nav 
-background: #e8f0fe;
-border-radius: #e8f0fe;
-font-weight: bold;
-nav a 
-margin-right: 1rem,
-color: #007acc;
-text-dcoration: nome;
-transition: color 0.3s ease;
-nav a:hover 
-color:  #005a9e;
-margin-top: 0;
-aside 
-background: #f0f0f0;
-margin-top:1rem;
-padding: 1rem;
-border-radius: 5px;
-font-size:0.9rem;
-color: #666;
-footer 
-text-align: center;
-font-size: 0.9rem;
-color: #777 
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Araña de Rincón - Loxosceles laeta</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2d2d2d;
+            --accent-color: #8b4513;
+            --gold-accent: #d4af37;
+            --text-light: #f5f5f5;
+            --text-dark: #333;
+            --gradient-bg: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            background: var(--gradient-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200px 0; }
+            100% { background-position: calc(200px + 100%) 0; }
+        }
+
+        /* Header elegante */
+        header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(212,175,55,0.1)"/></svg>');
+            animation: float 4s ease-in-out infinite;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: var(--gold-accent);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        header .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            opacity: 0.9;
+            font-weight: 300;
+            letter-spacing: 2px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        header .scientific-name {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--gold-accent);
+            margin-top: 0.5rem;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        /* Sección intro moderna */
+        .intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(45deg, #f8f9fa 0%, #ffffff 100%);
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .intro::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
+        }
+
+        .intro-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            animation: fadeInUp 1s ease-out 0.8s both;
+        }
+
+        .intro-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .intro-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .intro-text {
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        .intro-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .intro-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--gold-accent);
+            border-radius: 2px;
+        }
+
+        .intro-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .warning-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        /* Sección de información con cards elegantes */
+        .info {
+            padding: 4rem 2rem;
+            background: var(--gradient-bg);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out calc(1.2s + var(--delay, 0s)) both;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border-color: var(--gold-accent);
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold-accent);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--gold-accent);
+            border-radius: 50%;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            padding-left: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .card li:last-child {
+            border-bottom: none;
+        }
+
+        .card li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--gold-accent);
+            font-size: 0.8rem;
+        }
+
+        .card li:hover {
+            color: var(--gold-accent);
+        }
+
+        .card p {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer elegante */
+        footer {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .intro {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem 1rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            header {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Elementos decorativos */
+        .decorative-element {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .decorative-element:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .decorative-element:nth-child(2) {
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .decorative-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+    </style>
 </head>
 <body>
-<header>
-<h1>mi primera página HTML5>/h1>
-<p>Una estructura semántica y moderna</p>
-</header>
-<nav>
-<a href="#">Inicio</a>
-<a href="#">sobre Nosotros</a>
-<a href="#">servicios</a>
-<a href="#">contacto</a>
-</nav>
-<main>
-<section>
-<article>
-<h2>Bienvenido a nuestro sitio web</h2>
-<p>El lanzamiento de nuestra web fue un éxito: ¡Gracias por visitarnos!</p>
-</article>
-<aside>
-<h3>Noticias</h3>
-<p>El Lanzamiento de nuestra web fue un exito. ¡Gracias por visitarnos!</p>
-</aside>
-</section> 
-</main>
-<footer>
-<p>&copy; 2024 mi sitio web. todos los derechos reservados.</p>
-</footer>
-<html>
+    <div class="decorative-element"></div>
+    <div class="decorative-element"></div>
+    <div class="decorative-element"></div>
+
+    <header>
+        <h1>Araña de Rincón</h1>
+        <p class="subtitle">INFORMACIÓN CIENTÍFICA Y PREVENCIÓN</p>
+        <p class="scientific-name">Loxosceles laeta</p>
+    </header>
+
+    <section class="intro">
+        <div class="intro-image">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Loxosceles_laeta_%28male%29.jpg" alt="Araña de rincón macho (Loxosceles laeta)">
+        </div>
+        <div class="intro-text">
+            <h2>Especie Venenosa</h2>
+            <p>La araña de rincón es una de las especies arácnidas más peligrosas de Sudamérica. Su mordedura puede causar lesiones necróticas graves y requiere atención médica inmediata.</p>
+            <p>Esta especie se caracteriza por su naturaleza reservada y su tendencia a habitar en espacios oscuros y tranquilos de los hogares.</p>
+            <span class="warning-badge">⚠️ ATENCIÓN MÉDICA URGENTE</span>
+        </div>
+    </section>
+
+    <section class="info">
+        <div class="info-grid">
+            <div class="card" style="--delay: 0s;">
+                <h3>Características Físicas</h3>
+                <ul>
+                    <li>Tamaño corporal: 8-15 mm (hasta 4 cm con patas extendidas)</li>
+                    <li>Coloración marrón claro a oscuro</li>
+                    <li>Marca característica en forma de violín en el cefalotórax</li>
+                    <li>Seis ojos dispuestos en tres pares</li>
+                    <li>Patas largas y delgadas sin espinas</li>
+                    <li>Abdomen de forma ovalada</li>
+                </ul>
+            </div>
+
+            <div class="card" style="--delay: 0.2s;">
+                <h3>Comportamiento</h3>
+                <p>La araña de rincón es de naturaleza tímida y no agresiva. Solo muerde cuando se siente amenazada o es presionada contra la piel.</p>
+                <ul>
+                    <li>Actividad nocturna predominante</li>
+                    <li>Construye telas irregulares pequeñas</li>
+                    <li>Se esconde durante el día</li>
+                    <li>Evita la luz directa</li>
+                </ul>
+            </div>
+
+            <div class="card" style="--delay: 0.4s;">
+                <h3>Hábitat Preferido</h3>
+                <p>Prefiere ambientes secos, oscuros y con poca circulación de aire. Comúnmente encontrada en:</p>
+                <ul>
+                    <li>Grietas en paredes y techos</li>
+                    <li>Detrás de cuadros y espejos</li>
+                    <li>En ropa almacenada por períodos largos</li>
+                    <li>Espacios entre libros y papeles</li>
+                    <li>Áreas de almacenamiento poco utilizadas</li>
+                </ul>
+            </div>
+
+            <div class="card" style="--delay: 0.6s;">
+                <h3>Medidas de Prevención</h3>
+                <p>La prevención es clave para evitar encuentros no deseados:</p>
+                <ul>
+                    <li>Revisar y sacudir ropa antes de usar</li>
+                    <li>Inspeccionar zapatos almacenados</li>
+                    <li>Mantener orden y limpieza en rincones</li>
+                    <li>Sellar grietas y hendiduras</li>
+                    <li>Evitar acumulación de objetos en desuso</li>
+                    <li>Usar aspiradora en áreas poco accesibles</li>
+                </ul>
+            </div>
+
+            <div class="card" style="--delay: 0.8s;">
+                <h3>Síntomas de Mordedura</h3>
+                <p>El envenenamiento por mordedura puede presentar:</p>
+                <ul>
+                    <li>Dolor inicial leve que se intensifica</li>
+                    <li>Enrojecimiento y edema local</li>
+                    <li>Formación de úlcera necrótica</li>
+                    <li>Fiebre y malestar general</li>
+                    <li>En casos graves: hemólisis</li>
+                </ul>
+            </div>
+
+            <div class="card" style="--delay: 1s;">
+                <h3>Distribución Geográfica</h3>
+                <p>La Loxosceles laeta se encuentra principalmente en:</p>
+                <ul>
+                    <li>Chile (zona central y norte)</li>
+                    <li>Perú (regiones costeras)</li>
+                    <li>Argentina (noroeste)</li>
+                    <li>Zonas urbanas y semiurbanas</li>
+                    <li>Climas áridos y semiáridos</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Información Científica sobre Loxosceles laeta | Diseño Web Profesional</p>
+    </footer>
 </body>
+</html>
